@@ -81,7 +81,7 @@ function SearchBar({ placeholder}) {
       )}
 
       <div className="notHere">
-        <a className="dataItem">
+        <a className="dataItem" href="/AddJudge">
               <p>Judge not here?</p>
           </a>
       </div>
