@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs, setDoc, doc, query } from "firebase/firestore";
 import { useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddJudge() {
 
@@ -19,7 +21,7 @@ function AddJudge() {
         const querySnapshot =  getDocs(q).then(querySnapshot =>{
             querySnapshot.forEach((doc) => {
 
-                console.log(doc.id, " => ", doc.data());
+                //console.log(doc.id, " => ", doc.data());
                 temp.push(doc.id)
 
               })
@@ -34,16 +36,45 @@ function AddJudge() {
     const addNewJudge = async () => {
         console.log(firstName);
         console.log(lastName);
-                
-        if(firstName == "" || lastName ==""){
+        
+        var fullName = firstName+" " +lastName;
+
+
+        if(firstName.trim().length === 0 || lastName.trim().length === 0 ){
+
+            toast.error('Please enter a valid judge name', {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+
             return;
         }
 
-        if (judgeTotal.includes((firstName+" " +lastName))) {
+        fullName = fullName.toLowerCase()
+
+        if (judgeTotal.includes(fullName)) {
+            console.log("already have this in db")
+
+            toast.warn('Judge already in database', {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
         } 
         
         else {
-            setJudgeTotal([...judgeTotal, (firstName+" "+lastName)] )
+            setJudgeTotal([...judgeTotal, fullName] )
 
             setDoc(doc(db, "judge", (firstName+" "+lastName)), {
                 tech_truth: 5.0,
@@ -51,6 +82,17 @@ function AddJudge() {
                 talking_speed: 5.0,
                 aff_neg_percentage: 50.0,
                 total_votes: 0,
+            });
+
+            toast.success('Success!', {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
             });
 
         }
@@ -94,6 +136,7 @@ function AddJudge() {
             </div>
         </div>
 
+        <ToastContainer/>
         
     </div>
   )
