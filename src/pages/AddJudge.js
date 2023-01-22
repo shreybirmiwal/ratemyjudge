@@ -2,26 +2,60 @@ import React from 'react'
 import "./AddJudge.css";
 import { useState } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc, query } from "firebase/firestore";
+import { useEffect } from 'react';
 
 function AddJudge() {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [judgeTotal, setJudgeTotal] = useState([]);
 
-    const addNewJudge = () => {
-        console.log("Add new Judge")
+    useEffect(() => {
+        const temp = []
+
+        const q = query(collection(db, "judge"));
+
+        const querySnapshot =  getDocs(q).then(querySnapshot =>{
+            querySnapshot.forEach((doc) => {
+
+                console.log(doc.id, " => ", doc.data());
+                temp.push(doc.id)
+
+              })
+        }
+           
+        )
+        
+        setJudgeTotal(temp)
+
+    }, [])
+
+    const addNewJudge = async () => {
         console.log(firstName);
         console.log(lastName);
+                
+        if(firstName == "" || lastName ==""){
+            return;
+        }
 
-        setDoc(doc(db, "judge", (firstName+" "+lastName)), {
-            tech_truth: 5.0,
-            lay_flow_flaw: 5.0,
-            talking_speed: 5.0,
-            aff_neg_percentage: 50.0,
-            total_votes: 0,
-          });
+        if (judgeTotal.includes((firstName+" " +lastName))) {
+        } 
+        
+        else {
+            setJudgeTotal([...judgeTotal, (firstName+" "+lastName)] )
+
+            setDoc(doc(db, "judge", (firstName+" "+lastName)), {
+                tech_truth: 5.0,
+                lay_flow_flaw: 5.0,
+                talking_speed: 5.0,
+                aff_neg_percentage: 50.0,
+                total_votes: 0,
+            });
+
+        }
     }
+    
     const updateFirst = (event) => {
         setFirstName (event.target.value);
     }
@@ -35,6 +69,8 @@ function AddJudge() {
         <p className='headerText'>
             Add a new Judge
         </p>
+
+        <a href='/'> Back to Home </a>
 
 
         <div className='search'>
