@@ -6,6 +6,8 @@ import { collection, getDocs, setDoc, doc, query } from "firebase/firestore";
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Slider from 'react-rangeslider'
+import 'react-rangeslider/lib/index.css'; 
 
 function AddJudge() {
 
@@ -106,6 +108,10 @@ function AddJudge() {
         setLastName (event.target.value);
     }
 
+    const handleSliderChange = () => {
+        console.log('Change event completed')
+      };
+
     return (
     <div className='App'>
         <p className='headerText'>
@@ -135,6 +141,7 @@ function AddJudge() {
                 
             </div>
         </div>
+
 
         <ToastContainer/>
         
