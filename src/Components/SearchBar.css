@@ -1,8 +1,20 @@
-.searchInputs {
+
+  .App {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Nunito", sans-serif;
+    background-color: lightslategrey;
+  }
+
+  .searchInputs {
     margin-top: 105px;
     display: flex;
+    align-items: center;
   }
-  
+
   .search input {
     background-color: white;
     border: 0;

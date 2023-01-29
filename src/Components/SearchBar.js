@@ -51,7 +51,15 @@ function SearchBar({ placeholder}) {
   };
 
   return (
+    <div className="App">
+
+
     <div className="search">
+
+      <p className='headerText'>
+        RateMyJudge.com
+      </p>
+
       <div className="searchInputs">
         <input
           type="text"
@@ -70,8 +78,13 @@ function SearchBar({ placeholder}) {
       {filteredData.length != 0 && (
         <div className="dataResult">
           {filteredData.slice(0, 15).map((value, key) => {
+            
+            const arr = value.split(' ')
+
+            const temp = "/Judges/" + arr[0]+"/"+arr[1]
+
             return (
-              <a className="dataItem" key={value}>
+              <a className="dataItem" key={value} href={temp}>
                 <p>{value} </p>
               </a>
             );
@@ -87,6 +100,8 @@ function SearchBar({ placeholder}) {
       </div>
 
     </div>
+    </div>
+
   );
 }
 

@@ -8,8 +8,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'; 
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
 
 function AddJudge() {
+    const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -96,6 +99,9 @@ function AddJudge() {
                 progress: undefined,
                 theme: "dark",
             });
+
+            const tempName = "/judges/" + firstName+"/" +lastName
+            navigate(tempName, { replace: true });
 
         }
     }
