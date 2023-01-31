@@ -12,8 +12,8 @@ function ViewJudge() {
 
     const [data, setData] = useState({})
     const routeParams = useParams();
-    console.log(routeParams.first)
-    console.log(routeParams.last)
+    ///console.log(routeParams.first)
+//console.log(routeParams.last)
 
     const getData = async () =>{
       var nameVar = routeParams.first + " " + routeParams.last;
@@ -116,10 +116,22 @@ function ViewJudge() {
 
       </div>
 
+      <div className='padding15'></div>
 
-      <p> Comments go here </p>
 
+      
 
+      {data["comments"] &&  data["comments"].map((value, key) => {
+
+        return(
+          <div className='commentData'>
+            <p className='commentText' key={key}>{value}</p>
+          </div>
+        )
+
+      })}
+
+      
     </div>
   )
 }
