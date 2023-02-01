@@ -61,3 +61,22 @@
 .padding15{
   padding-top: 25px;
 }
+
+.addComment{
+  background-color: lightblue;
+  height: 120px;
+  width: 600px;
+  margin-bottom: 25px;
+  border-radius: 4px;
+}
+
+.commentInput{
+  font-size: 18px;
+  margin: 15px;
+  
+
+}
+
+.submitButton{
+
+}

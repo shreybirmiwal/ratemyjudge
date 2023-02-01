@@ -2,31 +2,79 @@ import React from 'react'
 import { useParams } from "react-router-dom";
 import './ViewJudge.css'
 import { db } from '../firebase';
-import { collection, getDocs, doc,getDoc } from "firebase/firestore";
+import { collection, getDocs, doc,getDoc,updateDoc, arrayUnion } from "firebase/firestore";
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ViewJudge() {
 
-    const [lay, setLay] = useState(50);
-
-
     const [data, setData] = useState({})
+    const [commentText, setcommentText] = useState("");
+
     const routeParams = useParams();
-    ///console.log(routeParams.first)
-//console.log(routeParams.last)
+
 
     const getData = async () =>{
       var nameVar = routeParams.first + " " + routeParams.last;
       const snap = await getDoc(doc(db, "judge", nameVar));
 
       setData(snap.data())
-  }
-  
+    }
+    
 
-      useEffect(() => {
-        getData()
+    const updateCommentText = (event) =>{
+      setcommentText(event.target.value)
+    }
+
+    const submitComment = () => {
+
+      console.log(commentText)
+      
+      if(commentText.trim().length === 0){
+        toast.error('Not a valid comment', {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+
+      } else {
+          //succesful comment, post to doc!
+        var nameVar = routeParams.first + " " + routeParams.last;
+        const docRef = doc(db, "judge", nameVar);
+
+        updateDoc(docRef, {
+          comments: arrayUnion(commentText)
+        })
+
+        toast.success('Success!', {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+
+        setcommentText("")
+        window.location.reload();
+
+      }
+
+
+    }
+
+    useEffect(() => {
+      getData()
         
-      }, [])
+    }, [])
 
 
   return (
@@ -118,20 +166,40 @@ function ViewJudge() {
 
       <div className='padding15'></div>
 
+      <div className='addComment'>
 
-      
+        <p className='commentText'> Add a comment: </p>
+
+        <input
+          className='commentInput'
+          type="text"
+          placeholder="Comment Text"
+          value={commentText}
+          onChange={updateCommentText}
+        />
+
+        <button 
+          className='submitButton'
+          onClick={submitComment}>
+          Submit
+        </button>
+
+
+      </div>
+
 
       {data["comments"] &&  data["comments"].map((value, key) => {
 
         return(
           <div className='commentData'>
-            <p className='commentText' key={key}>{value}</p>
+            <p className='commentText' key={value}>{value}</p>
           </div>
         )
 
       })}
 
-      
+      <ToastContainer/>
+
     </div>
   )
 }
