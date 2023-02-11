@@ -17,9 +17,9 @@ function ViewJudge() {
 
     const getData = async () =>{
       var nameVar = routeParams.first + " " + routeParams.last;
-      const snap = await getDoc(doc(db, "judge", nameVar));
+      const snap = await getDoc(doc(db, "votes", nameVar));
 
-      setData(snap.data())
+      setData(snap.data()["AverageStats"])
     }
     
 
@@ -88,7 +88,7 @@ function ViewJudge() {
       <a href={tempNameVar}> Vote on this Judge! </a>
 
       <div className='stats'>
-        <p> Judge Stats from [{data["total_votes"]}] votes</p>
+        <p> Judge Stats from [{data.votes}] votes</p>
       </div>
 
 
@@ -101,7 +101,7 @@ function ViewJudge() {
           className='outside'
         > 
           <div
-            style={{ width: `${data["lay_flow_flaw"]*4}px`, height: `${40}px` }}
+            style={{ width: `${data.lay*4/data.votes}px`, height: `${40}px` }}
             className='inside'>
             </div>
         </div>
@@ -119,7 +119,7 @@ function ViewJudge() {
           className='outside'
         > 
           <div
-            style={{ width: `${data["tech_truth"]*4}px`, height: `${40}px` }}
+            style={{ width: `${data.truth*4/data.votes}px`, height: `${40}px` }}
             className='inside'>
             </div>
         </div>
@@ -138,7 +138,7 @@ function ViewJudge() {
           className='outside'
         > 
           <div
-            style={{ width: `${data["talking_speed"]*4}px`, height: `${40}px` }}
+            style={{ width: `${data.slow*4/data.votes}px`, height: `${40}px` }}
             className='inside'>
             </div>
         </div>
@@ -157,7 +157,7 @@ function ViewJudge() {
           className='outside'
         > 
           <div
-            style={{ width: `${data["traditional_progressive"]*4}px`, height: `${40}px` }}
+            style={{ width: `${data.trad*4/data.votes}px`, height: `${40}px` }}
             className='inside'>
             </div>
         </div>

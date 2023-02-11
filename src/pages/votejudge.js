@@ -118,9 +118,9 @@ function VoteJudge() {
       }
 
       tLay = (tLay+lay)
-      tTrad = (tTrad+lay)
-      tSlow = (tSlow+lay)
-      tTruth = (tTruth+lay)
+      tTrad = (tTrad+trad)
+      tSlow = (tSlow+slow)
+      tTruth = (tTruth+truth)
       
 
       updateDoc(snap, {
