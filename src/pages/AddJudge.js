@@ -21,7 +21,7 @@ function AddJudge() {
     useEffect(() => {
         const temp = []
 
-        const q = query(collection(db, "judge"));
+        const q = query(collection(db, "votes"));
 
         const querySnapshot =  getDocs(q).then(querySnapshot =>{
             querySnapshot.forEach((doc) => {

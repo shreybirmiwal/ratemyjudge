@@ -57,23 +57,7 @@ function VoteJudge() {
   }
 
   const updateStats = () => {
-    //console.log(lay)
-    //console.log(truth)
-    //console.log(slow)
-   // console.log(trad)
-   // console.log(user)
 
-    toast.success('Success!', {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-    //console.log(user)
 
     const snap =  doc(db, "votes", (firstName+" "+lastName))
 
@@ -103,11 +87,12 @@ function VoteJudge() {
       var tTrad = 0
       var tSlow = 0
       var tTruth = 0
-      console.log("user " + user)
 
       for (let key in data) {
-        console.log(key)
-        if(key !== "AverageStats" && key!==user){
+        //console.log(key)
+        console.log(data[key].lay)
+
+        if(key !== "AverageStats" && key!==user &&key!=="comments"){
           tLay += data[key].lay
           tTrad += data[key].trad
           tSlow += data[key].slow
@@ -116,6 +101,7 @@ function VoteJudge() {
         }
         if(key == user) votesTemp--;
       }
+
 
       tLay = (tLay+lay)
       tTrad = (tTrad+trad)

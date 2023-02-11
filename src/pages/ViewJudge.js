@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 function ViewJudge() {
 
     const [data, setData] = useState({})
+    const [commentsData, SetcommentsData] = useState({})
+
     const [commentText, setcommentText] = useState("");
 
     const routeParams = useParams();
@@ -18,7 +20,7 @@ function ViewJudge() {
     const getData = async () =>{
       var nameVar = routeParams.first + " " + routeParams.last;
       const snap = await getDoc(doc(db, "votes", nameVar));
-
+      SetcommentsData(snap.data())
       setData(snap.data()["AverageStats"])
     }
     
@@ -46,7 +48,7 @@ function ViewJudge() {
       } else {
           //succesful comment, post to doc!
         var nameVar = routeParams.first + " " + routeParams.last;
-        const docRef = doc(db, "judge", nameVar);
+        const docRef = doc(db, "votes", nameVar);
 
         updateDoc(docRef, {
           comments: arrayUnion(commentText)
@@ -64,8 +66,7 @@ function ViewJudge() {
         });
 
         setcommentText("")
-        window.location.reload();
-
+        
       }
 
 
@@ -190,7 +191,7 @@ function ViewJudge() {
       </div>
 
 
-      {data["comments"] &&  data["comments"].map((value, key) => {
+      {commentsData["comments"] &&  commentsData["comments"].map((value, key) => {
 
         return(
           <div className='commentData'>

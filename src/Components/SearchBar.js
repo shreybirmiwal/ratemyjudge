@@ -14,7 +14,7 @@ function SearchBar({ placeholder}) {
   const getData = async () =>{
       const temp = [];
 
-      const querySnapshot = await getDocs(collection(db, "judge"));
+      const querySnapshot = await getDocs(collection(db, "votes"));
       querySnapshot.forEach((doc) => {
        // console.log(doc.id, " => ", doc.data());
         temp.push(doc.id)
