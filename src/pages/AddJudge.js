@@ -82,11 +82,15 @@ function AddJudge() {
             setJudgeTotal([...judgeTotal, fullName] )
 
             setDoc(doc(db, "judge", (firstName+" "+lastName)), {
-                tech_truth: 5.0,
-                lay_flow_flaw: 5.0,
-                talking_speed: 5.0,
-                aff_neg_percentage: 50.0,
+                tech_truth: 50,
+                lay_flow_flaw: 50,
+                talking_speed: 50,
+                traditional_progressive: 50,
                 total_votes: 0,
+                comments: [],
+            });
+            setDoc(doc(db, "votes", (firstName+" "+lastName)), {
+                AverageStats: {lay:50, slow:50, trad:50, truth:50, votes: 0 }
             });
 
             toast.success('Success!', {

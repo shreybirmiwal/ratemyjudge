@@ -51,8 +51,6 @@ function SearchBar({ placeholder}) {
   };
 
   return (
-    <div className="App">
-
 
     <div className="search">
 
@@ -99,7 +97,6 @@ function SearchBar({ placeholder}) {
           </a>
       </div>
 
-    </div>
     </div>
 
   );

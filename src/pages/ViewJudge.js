@@ -76,6 +76,7 @@ function ViewJudge() {
         
     }, [])
 
+    const tempNameVar = "/Vote/"+routeParams.first+"/"+routeParams.last;
 
   return (
     <div className="App">
@@ -84,6 +85,7 @@ function ViewJudge() {
       </div>
 
       <a href='/'> back to home </a>
+      <a href={tempNameVar}> Vote on this Judge! </a>
 
       <div className='stats'>
         <p> Judge Stats from [{data["total_votes"]}] votes</p>
