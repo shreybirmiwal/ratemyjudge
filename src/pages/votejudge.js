@@ -40,16 +40,16 @@ function VoteJudge() {
   const tempNameVar = "/Judges/"+firstName+"/"+lastName;
 
   const updateLaySlider = (event) => {
-    setLay(event.target.value)
+    setLay(Number(event.target.value))
   }
   const updateTruthSlider = (event) => {
-    setTruth(event.target.value)
+    setTruth(Number(event.target.value))
   }
   const updateSlowSlider = (event) => {
-    setSlow(event.target.value)
+    setSlow(Number(event.target.value))
   }
   const updateTradSlider = (event) => {
-    setTrad(event.target.value)
+    setTrad(Number(event.target.value))
   }
 
   const updateName = (event) =>{
@@ -57,11 +57,11 @@ function VoteJudge() {
   }
 
   const updateStats = () => {
-    console.log(lay)
-    console.log(truth)
-    console.log(slow)
-    console.log(trad)
-    console.log(user)
+    //console.log(lay)
+    //console.log(truth)
+    //console.log(slow)
+   // console.log(trad)
+   // console.log(user)
 
     toast.success('Success!', {
       position: "top-left",
@@ -73,7 +73,7 @@ function VoteJudge() {
       progress: undefined,
       theme: "dark",
     });
-    console.log(user)
+    //console.log(user)
 
     const snap =  doc(db, "votes", (firstName+" "+lastName))
 
@@ -81,11 +81,57 @@ function VoteJudge() {
       [user] : {lay: lay, truth: truth, slow: slow, trad: trad}
     })
 
-    console.log(data);
+    const avgStats = data["AverageStats"]
+    var votesTemp = avgStats["votes"]
+    //console.log(avgStats)
 
-    const tempName = "/judges/" + firstName+"/" +lastName
+    if(votesTemp === 0){
+      updateDoc(snap, {
+        AverageStats : {lay: lay, truth: truth, slow: slow, trad: trad, votes:1}
+      })
 
-    //navigate(tempName, { replace: true });
+
+      const tempName = "/judges/" + firstName+"/" +lastName
+      navigate(tempName, { replace: true });
+
+    }
+    else{
+      //if its not the first vote, we want to reaverage and update avg stats
+      //data includes all data except new data and we also dont want to read avg data
+
+      var tLay = 0
+      var tTrad = 0
+      var tSlow = 0
+      var tTruth = 0
+      console.log("user " + user)
+
+      for (let key in data) {
+        console.log(key)
+        if(key !== "AverageStats" && key!==user){
+          tLay += data[key].lay
+          tTrad += data[key].trad
+          tSlow += data[key].slow
+          tTruth += data[key].truth
+          console.log(key, data[key]);
+        }
+        if(key == user) votesTemp--;
+      }
+
+      tLay = (tLay+lay)
+      tTrad = (tTrad+lay)
+      tSlow = (tSlow+lay)
+      tTruth = (tTruth+lay)
+      
+
+      updateDoc(snap, {
+        AverageStats : {lay: tLay, truth: tTruth, slow: tSlow, trad: tTrad, votes:(votesTemp+1)}
+      })
+
+      const tempName = "/judges/" + firstName+"/" +lastName
+      navigate(tempName, { replace: true });
+
+    }
+
   }
 
   return (
