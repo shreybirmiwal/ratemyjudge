@@ -15,7 +15,7 @@ function App() {
         <Route path="/AddJudge" element={<AddJudge/>}/>
         <Route path="/Judges/:first/:last" element={<ViewJudge/>} />
         <Route path="/Vote/:first/:last" element={<VoteJudge/>} />
-        <Route path="/Account/:redirect" element={<LoginSignUp/>}/>
+        <Route path="/Account/:redirect/:first/:last" element={<LoginSignUp/>}/>
 
       </Routes>
     </Router>

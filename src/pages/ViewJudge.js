@@ -6,6 +6,8 @@ import { collection, getDocs, doc,getDoc,updateDoc, arrayUnion } from "firebase/
 import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 function ViewJudge() {
 
@@ -15,7 +17,24 @@ function ViewJudge() {
     const [commentText, setcommentText] = useState("");
 
     const routeParams = useParams();
+    const [authUser, setAuthUser] = useState(null);
 
+    useEffect(() => {
+      getData()
+      const listen = onAuthStateChanged(auth, (user) => {
+          console.log(user)
+        if (user) {
+          setAuthUser(user);
+        } else {
+          setAuthUser(null);
+        }
+      });
+  
+      return () => {
+        listen();
+      };
+      
+    }, []);
 
     const getData = async () =>{
       var nameVar = routeParams.first + " " + routeParams.last;
@@ -72,12 +91,8 @@ function ViewJudge() {
 
     }
 
-    useEffect(() => {
-      getData()
-        
-    }, [])
-
     const tempNameVar = "/Vote/"+routeParams.first+"/"+routeParams.last;
+    const tempNameVar2 = "/Account/Vote/"+routeParams.first+"/"+routeParams.last;
 
   return (
     <div className="App">
@@ -86,7 +101,14 @@ function ViewJudge() {
       </div>
 
       <a href='/'> back to home </a>
-      <a href={tempNameVar}> Vote on this Judge! </a>
+
+      {authUser ?(
+        <a href={tempNameVar}> Vote on this Judge! </a>
+
+      ):(
+        <a href={tempNameVar2}> Vote on this Judge! </a>
+      )}
+
 
       <div className='stats'>
         <p> Judge Stats from [{data.votes}] votes</p>

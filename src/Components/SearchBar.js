@@ -119,7 +119,7 @@ function SearchBar({ placeholder}) {
         </a>
 
         ):(
-          <a className="dataItem" href="/account/AddJudge">
+          <a className="dataItem" href="/account/AddJudge/x/x">
             <p>Judge not here?</p>
           </a>
         )}

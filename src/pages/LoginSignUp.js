@@ -66,8 +66,13 @@ const LoginSignUp = () => {
             if(routeParams.redirect == "Home"){
                 navigate("/", { replace: true });
             }
-            if(routeParams.redirect == "AddJudge"){
+            else if(routeParams.redirect == "AddJudge"){
                 navigate("/AddJudge", { replace: true });
+            }
+            else if(routeParams.redirect=="Vote"){
+                const tempNameVar = "/Vote/"+routeParams.first+"/"+routeParams.last;
+                navigate(tempNameVar, {replace: true});
+                console.log(routeParams.redirect)
             }
 
         })
@@ -106,8 +111,13 @@ const LoginSignUp = () => {
                 if(routeParams.redirect == "Home"){
                     navigate("/", { replace: true });
                 }
-                if(routeParams.redirect == "AddJudge"){
+                else if (routeParams.redirect == "AddJudge"){
                     navigate("/AddJudge", { replace: true });
+                }
+                else if(routeParams.redirect=="Vote"){
+                    const tempNameVar = "/Vote/"+routeParams.first+"/"+routeParams.last;
+                    navigate(tempNameVar, {replace: true});
+                    console.log(routeParams.redirect)
                 }
           })
           .catch((error) => {
