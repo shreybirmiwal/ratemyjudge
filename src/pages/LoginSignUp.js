@@ -187,7 +187,7 @@ return (
 
     ) : (
         <>
-        <p>{`Signed In as ${authUser.email}`}</p>
+        <p>{`Signed In as ${authUser.uid}`}</p>
         <button onClick={userSignOut}>Sign Out</button>
         </>
     )}

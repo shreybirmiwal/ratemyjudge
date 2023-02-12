@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebase';
 
 function VoteJudge() {
     const navigate = useNavigate();
@@ -20,7 +22,7 @@ function VoteJudge() {
     const [slow, setSlow] = useState(50);
     const [trad, setTrad] = useState(50);
 
-    const [user, setUser] = useState("")
+    const [authUser, setAuthUser] = useState(null);
 
     const routeParams = useParams();
 
@@ -33,9 +35,21 @@ function VoteJudge() {
     }
 
     useEffect(() => {
-        getData()
-          
-      }, [])
+      getData()
+      const listen = onAuthStateChanged(auth, (user) => {
+          console.log(user)
+        if (user) {
+          setAuthUser(user);
+        } else {
+          setAuthUser(null);
+        }
+      });
+  
+      return () => {
+        listen();
+      };
+      
+    }, []);
 
   const tempNameVar = "/Judges/"+firstName+"/"+lastName;
 
@@ -52,12 +66,10 @@ function VoteJudge() {
     setTrad(Number(event.target.value))
   }
 
-  const updateName = (event) =>{
-     setUser(event.target.value)
-  }
 
   const updateStats = () => {
 
+    var user = authUser.uid
 
     const snap =  doc(db, "votes", (firstName+" "+lastName))
 
@@ -128,16 +140,6 @@ function VoteJudge() {
 
       <a href='/'> back to home </a>
       <a href={tempNameVar}> View this Judge </a>
-
-      <p>   </p>
-      <input
-          type="text"
-          placeholder="Enter username voting from"
-          value={user}
-          onChange={updateName}
-      />
-      <p>   </p>
-
 
 
       <div className='stats'>
