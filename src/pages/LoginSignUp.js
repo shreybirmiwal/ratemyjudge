@@ -72,9 +72,11 @@ const LoginSignUp = () => {
             else if(routeParams.redirect=="Vote"){
                 const tempNameVar = "/Vote/"+routeParams.first+"/"+routeParams.last;
                 navigate(tempNameVar, {replace: true});
-                console.log(routeParams.redirect)
             }
-
+            else if(routeParams.redirect=="judges"){
+                const tempNameVar = "/judges/"+routeParams.first+"/"+routeParams.last;
+                navigate(tempNameVar, {replace: true});
+            }
         })
         .catch((error) => {
           console.log(error);
@@ -117,8 +119,11 @@ const LoginSignUp = () => {
                 else if(routeParams.redirect=="Vote"){
                     const tempNameVar = "/Vote/"+routeParams.first+"/"+routeParams.last;
                     navigate(tempNameVar, {replace: true});
-                    console.log(routeParams.redirect)
                 }
+                else if(routeParams.redirect=="judges"){
+                const tempNameVar = "/judges/"+routeParams.first+"/"+routeParams.last;
+                navigate(tempNameVar, {replace: true});
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -187,7 +192,7 @@ return (
 
     ) : (
         <>
-        <p>{`Signed In as ${authUser.uid}`}</p>
+        <p>{`Signed In as ${authUser.email}`}</p>
         <button onClick={userSignOut}>Sign Out</button>
         </>
     )}

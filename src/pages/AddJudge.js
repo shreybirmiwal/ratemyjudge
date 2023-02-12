@@ -9,7 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'; 
 import { Route, Routes, useNavigate } from 'react-router-dom';
-
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 function AddJudge() {
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ function AddJudge() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [judgeTotal, setJudgeTotal] = useState([]);
+    const [authUser, setAuthUser] = useState(null);
 
     useEffect(() => {
         const temp = []
@@ -36,9 +38,27 @@ function AddJudge() {
         
         setJudgeTotal(temp)
 
+        const listen = onAuthStateChanged(auth, (user) => {
+            console.log(user)
+          if (user) {
+            setAuthUser(user);
+          } else {
+            setAuthUser(null);
+          }
+        });
+
+        return () => {
+            listen();
+          };
+
     }, [])
 
     const addNewJudge = async () => {
+
+        if(!authUser){
+            navigate("/Account/AddJudge/x/x",{replace:true});
+        } else {
+
         console.log(firstName);
         console.log(lastName);
         
@@ -100,6 +120,7 @@ function AddJudge() {
             const tempName = "/judges/" + firstName+"/" +lastName
             navigate(tempName, { replace: true });
 
+        }
         }
     }
     

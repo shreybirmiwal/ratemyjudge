@@ -8,9 +8,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 function ViewJudge() {
-
+    const navigate = useNavigate();
     const [data, setData] = useState({})
     const [commentsData, SetcommentsData] = useState({})
 
@@ -49,6 +50,12 @@ function ViewJudge() {
     }
 
     const submitComment = () => {
+      var tempNameVar2 = "/account/judges/"+routeParams.first+"/"+routeParams.last;
+
+      if(!authUser){
+        navigate(tempNameVar2,{replace:true});
+
+      } else {
 
       console.log(commentText)
       
@@ -87,8 +94,7 @@ function ViewJudge() {
         setcommentText("")
         
       }
-
-
+    }
     }
 
     const tempNameVar = "/Vote/"+routeParams.first+"/"+routeParams.last;

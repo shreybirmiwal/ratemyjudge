@@ -68,6 +68,11 @@ function VoteJudge() {
 
 
   const updateStats = () => {
+    var tempNameVar2 = "/Account/Vote/"+routeParams.first+"/"+routeParams.last;
+
+    if(!authUser){
+      navigate(tempNameVar2,{replace:true});
+    } else {
 
     var user = authUser.uid
 
@@ -131,7 +136,7 @@ function VoteJudge() {
     }
 
   }
-
+  }
   return (
     <div className="App">
       <div className='headerText'>
