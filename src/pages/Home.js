@@ -6,7 +6,7 @@ function Home() {
   return (
     <div className="App">
 
-        <a href="/Account/Home/x/x"> Log in or Sign up </a>
+        <a href="/Account/Home/x/x" className="text-3xl font-bold underline"> Log in or Sign up </a>
         <SearchBar placeholder={"Search for judges..."}/>
 
     </div>
