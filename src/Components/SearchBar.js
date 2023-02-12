@@ -4,12 +4,32 @@ import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import { db } from '../firebase';
 import { collection, getDocs } from "firebase/firestore";
-
+import { auth } from "../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 function SearchBar({ placeholder}) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
   const [data, setData] = useState([])
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+        
+    const listen = onAuthStateChanged(auth, (user) => {
+        console.log(user)
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+
+    return () => {
+      listen();
+    };
+    
+  }, []);
+
 
   const getData = async () =>{
       const temp = [];
@@ -19,7 +39,7 @@ function SearchBar({ placeholder}) {
        // console.log(doc.id, " => ", doc.data());
         temp.push(doc.id)
       });
-
+      
       setData(temp)
   }
   
@@ -92,9 +112,19 @@ function SearchBar({ placeholder}) {
       )}
 
       <div className="notHere">
+        {authUser ? (
+
         <a className="dataItem" href="/AddJudge">
-              <p>Judge not here?</p>
+          <p>Judge not here?</p>
+        </a>
+
+        ):(
+          <a className="dataItem" href="/account/AddJudge">
+            <p>Judge not here?</p>
           </a>
+        )}
+
+
       </div>
 
     </div>

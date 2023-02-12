@@ -7,9 +7,11 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const LoginSignUp = () => {
     const navigate = useNavigate();
+    const routeParams = useParams();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -21,6 +23,7 @@ const LoginSignUp = () => {
 
 
     useEffect(() => {
+        
         const listen = onAuthStateChanged(auth, (user) => {
             console.log(user)
           if (user) {
@@ -33,6 +36,7 @@ const LoginSignUp = () => {
         return () => {
           listen();
         };
+        
       }, []);
     
       const userSignOut = () => {
@@ -58,6 +62,13 @@ const LoginSignUp = () => {
             progress: undefined,
             theme: "dark",
             });
+
+            if(routeParams.redirect == "Home"){
+                navigate("/", { replace: true });
+            }
+            if(routeParams.redirect == "AddJudge"){
+                navigate("/AddJudge", { replace: true });
+            }
 
         })
         .catch((error) => {
@@ -91,6 +102,13 @@ const LoginSignUp = () => {
                 progress: undefined,
                 theme: "dark",
                 });
+
+                if(routeParams.redirect == "Home"){
+                    navigate("/", { replace: true });
+                }
+                if(routeParams.redirect == "AddJudge"){
+                    navigate("/AddJudge", { replace: true });
+                }
           })
           .catch((error) => {
             console.log(error);
