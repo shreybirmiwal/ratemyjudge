@@ -81,14 +81,7 @@ function AddJudge() {
         else {
             setJudgeTotal([...judgeTotal, fullName] )
 
-            setDoc(doc(db, "judge", (firstName+" "+lastName)), {
-                tech_truth: 50,
-                lay_flow_flaw: 50,
-                talking_speed: 50,
-                traditional_progressive: 50,
-                total_votes: 0,
-                comments: [],
-            });
+
             setDoc(doc(db, "votes", (firstName+" "+lastName)), {
                 AverageStats: {lay:50, slow:50, trad:50, truth:50, votes: 0 }
             });
