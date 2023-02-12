@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
         
-        <Route path="/" element={<Home/>}/>
+        <Route exact path="/" element={<Home/>}/>
         <Route path="/AddJudge" element={<AddJudge/>}/>
         <Route path="/Judges/:first/:last" element={<ViewJudge/>} />
         <Route path="/Vote/:first/:last" element={<VoteJudge/>} />
