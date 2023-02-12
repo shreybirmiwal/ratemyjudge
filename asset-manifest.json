@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ratemyjudge/static/css/main.87e536c4.css",
+    "main.js": "/ratemyjudge/static/js/main.20c5bf19.js",
+    "static/js/787.495edad2.chunk.js": "/ratemyjudge/static/js/787.495edad2.chunk.js",
+    "index.html": "/ratemyjudge/index.html",
+    "main.87e536c4.css.map": "/ratemyjudge/static/css/main.87e536c4.css.map",
+    "main.20c5bf19.js.map": "/ratemyjudge/static/js/main.20c5bf19.js.map",
+    "787.495edad2.chunk.js.map": "/ratemyjudge/static/js/787.495edad2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.87e536c4.css",
+    "static/js/main.20c5bf19.js"
+  ]
+}
