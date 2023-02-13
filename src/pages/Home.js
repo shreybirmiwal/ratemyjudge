@@ -1,7 +1,7 @@
 import React from "react"
 
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
+import Navbar from "../components/Navbar.js";
+import Hero from "../components/Hero.js";
 import SearchBar from '../components/SearchBar';
 
 function Home() {

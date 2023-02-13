@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [logo, setLogo] = useState(false)
