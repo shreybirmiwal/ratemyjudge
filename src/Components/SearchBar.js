@@ -13,7 +13,8 @@ function SearchBar({ placeholder}) {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
-        
+    
+    getData()
     const listen = onAuthStateChanged(auth, (user) => {
         console.log(user)
       if (user) {
@@ -42,11 +43,6 @@ function SearchBar({ placeholder}) {
       setData(temp)
   }
   
-
-  useEffect(() => {
-    getData()    
-  }, [])
-
 
   const handleFilter = (event) => {
    // console.log(data)
@@ -118,7 +114,6 @@ function SearchBar({ placeholder}) {
             <p>Judge not here?</p>
           </a>
         )}
-
 
       </div>
 
