@@ -1,13 +1,15 @@
 import React from "react"
-import SearchBar from '../Components/SearchBar';
-import './Home.css'
+
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import SearchBar from '../components/SearchBar';
 
 function Home() {
   return (
     <div className="App">
 
-        <a href="/Account/Home/x/x" className="text-3xl font-bold underline"> Log in or Sign up </a>
-        <SearchBar placeholder={"Search for judges..."}/>
+        <Navbar/>
+        <Hero/>
 
     </div>
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./SearchBar.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import { db } from '../firebase';
@@ -73,10 +72,6 @@ function SearchBar({ placeholder}) {
   return (
 
     <div className="search">
-
-      <p className='headerText'>
-        RateMyJudge.com
-      </p>
 
       <div className="searchInputs">
         <input
