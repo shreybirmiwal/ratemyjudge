@@ -193,7 +193,6 @@ return (
            </div>
            <div className='mt-2 flex flex-col'>
                <button className='active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01]  ease-in-out transform py-4 bg-violet-500 rounded-xl text-white font-bold text-lg' onClick={signIn}>Log in</button>
-
            </div>
 
            <a className=' flex flex-col mt-4 justify-center items-center font-medium  text-black font-bold hover:text-blue-400'>Forgot password?</a>
@@ -249,10 +248,20 @@ return (
    </div>
 
     ) : (
-        <>
-        <p>{`Signed In as ${authUser.email}`}</p>
-        <button onClick={userSignOut}>Sign Out</button>
-        </>
+
+      <div className='flex flex-row w-full h-screen justify-center'>
+
+        <div className='absolute w-full h-full top-0 left-0 bg-gray-900/30'></div>
+        <div className='absolute top-0 h-full flex flex-col justify-center text-center text-black p-4'>
+          
+
+          <h1 className="mb-7">{`Signed In as ${authUser.email}`}</h1>
+          
+          <button onClick={userSignOut}>Sign Out</button>
+
+        </div>
+      </div>
+
     )}
 
 </div>

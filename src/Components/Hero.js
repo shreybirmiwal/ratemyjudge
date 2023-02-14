@@ -60,11 +60,6 @@ const Hero = () => {
       }
     };
   
-    const clearInput = () => {
-      setFilteredData([]);
-      setWordEntered("");
-    };
-
 
     return (
     <div className='w-full h-screen relative'>

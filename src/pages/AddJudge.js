@@ -1,5 +1,4 @@
 import React from 'react'
-import "./AddJudge.css";
 import { useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs, setDoc, doc, query } from "firebase/firestore";
@@ -11,6 +10,7 @@ import 'react-rangeslider/lib/index.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import Navbar from '../components/Navbar';
 
 function AddJudge() {
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ function AddJudge() {
             querySnapshot.forEach((doc) => {
 
                 //console.log(doc.id, " => ", doc.data());
-                temp.push(doc.id)
+                temp.push(doc.id.toLowerCase())
 
               })
         }
@@ -132,44 +132,40 @@ function AddJudge() {
         setLastName (event.target.value);
     }
 
-    const handleSliderChange = () => {
-        console.log('Change event completed')
-      };
-
     return (
-    <div className='App'>
-        <p className='headerText'>
-            Add a new Judge
-        </p>
+        <div className='w-full h-screen relative'>
+        <Navbar/>
 
-        <a href='/'> Back to Home </a>
+        <div className='absolute w-full h-full top-0 left-0 bg-gray-900/30'></div>
+        <div className='absolute top-0 w-full h-full flex flex-col justify-center text-center text-black p-4'>
+          
+          <h1>Add a Judge</h1>
+          <h2 className='py-4'></h2>
 
-
-        <div className='search'>
-            <div className='searchInputs'>
+          <div
+            className='flex justify-between items-center max-w-[700px] mx-auto w-full  p-1
+            rounded-md text-black '>
+                <input
+                   className='w-full border-2 bg-white border-gray-100 rounded-xl p-4 mr-1.5 mt-1 bg-transparent'
+                   type='text'
+                    placeholder="First Name"
+                    onChange={updateFirst}/>
 
                 <input
-                    type="text"
-                    placeholder= "Judge First Name"
-                    onChange={updateFirst}
-                />
-
-                <input
-                    type="text"
-                    placeholder= "Judge Last Name"
-                    onChange={updateSecond}
-                />
+                   className='w-full border-2 bg-white rounded-xl p-4 ml-1.5 mt-1 bg-transparent'
+                   type='text'
+                    placeholder="Last Name"
+                    onChange={updateSecond}/>
                 
 
-                <button className='submitButton' onClick={addNewJudge}>Submit</button>
-                
-            </div>
+                <button className='m-5 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01]  ease-in-out transform py-4 bg-violet-500 rounded-xl text-white font-bold text-lg' onClick={addNewJudge}>Submit</button>
+            
+          </div>
+  
+  
         </div>
-
-
-        <ToastContainer/>
-        
-    </div>
+            <ToastContainer/>
+      </div>
   )
 }
 

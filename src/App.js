@@ -5,6 +5,7 @@ import AddJudge from './pages/AddJudge';
 import ViewJudge from './pages/ViewJudge';
 import VoteJudge from "./pages/votejudge";
 import LoginSignUp from "./pages/LoginSignUp";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Judges/:first/:last" element={<ViewJudge/>} />
         <Route path="/Vote/:first/:last" element={<VoteJudge/>} />
         <Route path="/Account/:redirect/:first/:last" element={<LoginSignUp/>}/>
+        <Route path="/About" element={<About/>}/>
 
       </Routes>
     </Router>

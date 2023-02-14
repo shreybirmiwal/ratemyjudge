@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams } from "react-router-dom";
-import './ViewJudge.css'
 import { db } from '../firebase';
 import { collection, getDocs, doc,getDoc,updateDoc, arrayUnion } from "firebase/firestore";
 import { useEffect, useState } from 'react';
@@ -9,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { Route, Routes, useNavigate } from 'react-router-dom';
+
+import Navbar from '../components/Navbar';
 
 function ViewJudge() {
     const navigate = useNavigate();
@@ -101,101 +102,64 @@ function ViewJudge() {
     const tempNameVar2 = "/Account/Vote/"+routeParams.first+"/"+routeParams.last;
 
   return (
-    <div className="App">
-      <div className='headerText'>
-        <p> Judging information about {routeParams.first} {routeParams.last}</p>
-      </div>
+    <div>
+      <Navbar/>
+      <div className='w-full h-screen relative'>
+        <div className='absolute w-full h-full top-0 left-0 bg-gray-900/30'></div>
+        <div className='absolute top-0 w-full h-full flex flex-col justify-center text-center text-black p-4'>
+          <h1 className='mb-5'> Judging information about {routeParams.first} {routeParams.last}</h1>
+          
+          <div className="flex flex-row justify-center">
 
-      <a href='/'> back to home </a>
+            <h3 className='mb-5'> Data from [{data.votes}] votes,&nbsp;</h3>
+            {authUser ?(
+            <a className='text-blue-500 hover:text-white' href={tempNameVar}> <h3> vote on this judge here </h3></a>
 
-      {authUser ?(
-        <a href={tempNameVar}> Vote on this Judge! </a>
+            ):(
+                <a className='text-blue-500 hover:text-white' href={tempNameVar2}> <h3> vote on this judge here </h3></a>
+            )}
 
-      ):(
-        <a href={tempNameVar2}> Vote on this Judge! </a>
-      )}
+          </div>
 
-
-      <div className='stats'>
-        <p> Judge Stats from [{data.votes}] votes</p>
-      </div>
-
-
-      <div className='stats'>
-        <p className='labelingLeft'>Lay&nbsp;</p>
-
-
-        <div
-          style={{ width: `${400}px`, height: `${40}px` }}
-          className='outside'
-        > 
-          <div
-            style={{ width: `${data.lay*4/data.votes}px`, height: `${40}px` }}
-            className='inside'>
-            </div>
+        <div className='flex flex-row justify-center mt-10'>
+          <h3 className='mr-5 mt-1.5'>Lay&nbsp;</h3>
+          <div style={{ width: `${400}px`, height: `${40}px` }} className='bg-white'> 
+            <div style={{ width: `${data.lay*4/data.votes}px`, height: `${40}px` }}className='bg-blue-300'/>
+          </div>
+          <h3 className='ml-5 mt-1.5'>Flow</h3>  
         </div>
 
-        <p className='labelingRight'>Flow</p>
-
-      </div>
-
-      <div className='stats'>
-        <p className='labelingLeft'>Truth</p>
-
-
-        <div
-          style={{ width: `${400}px`, height: `${40}px` }}
-          className='outside'
-        > 
-          <div
-            style={{ width: `${data.truth*4/data.votes}px`, height: `${40}px` }}
-            className='inside'>
-            </div>
+        <div className='flex flex-row justify-center mt-10'>
+          <h3 className='mr-5 mt-1.5'>Truth</h3>
+          <div style={{ width: `${400}px`, height: `${40}px` }} className='bg-white'> 
+            <div style={{ width: `${data.truth*4/data.votes}px`, height: `${40}px` }}className='bg-blue-300'/>
+          </div>
+          <h3 className='ml-5 mt-1.5'>Tech</h3>  
         </div>
 
-        <p className='labelingRight'>Tech&nbsp;&nbsp;&nbsp;</p>
 
+        <div className='flex flex-row justify-center mt-10'>
+          <h3 className='mr-5 mt-1.5'>Slow</h3>
+          <div style={{ width: `${400}px`, height: `${40}px` }} className='bg-white'> 
+            <div style={{ width: `${data.slow*4/data.votes}px`, height: `${40}px` }}className='bg-blue-300'/>
+          </div>
+          <h3 className='ml-5 mt-1.5'>Spread</h3>  
+        </div>  
+
+
+        <div className='flex flex-row justify-center mt-10'>
+          <h3 className='mr-5 mt-1.5'>Traditional</h3>
+          <div style={{ width: `${400}px`, height: `${40}px` }} className='bg-white'> 
+            <div style={{ width: `${data.trad*4/data.votes}px`, height: `${40}px` }}className='bg-blue-300'/>
+          </div>
+          <h3 className='ml-5 mt-1.5'>Progressive</h3>  
+        </div>  
+
+        
+       </div>
+       
       </div>
 
-
-      <div className='stats'>
-        <p className='labelingLeft'>Slow&nbsp;</p>
-
-
-        <div
-          style={{ width: `${400}px`, height: `${40}px` }}
-          className='outside'
-        > 
-          <div
-            style={{ width: `${data.slow*4/data.votes}px`, height: `${40}px` }}
-            className='inside'>
-            </div>
-        </div>
-
-        <p className='labelingRight'>Spread</p>
-
-      </div>
-
-
-      <div className='stats'>
-        <p className='labelingLeft'>Traditional</p>
-
-
-        <div
-          style={{ width: `${400}px`, height: `${40}px` }}
-          className='outside'
-        > 
-          <div
-            style={{ width: `${data.trad*4/data.votes}px`, height: `${40}px` }}
-            className='inside'>
-            </div>
-        </div>
-
-        <p className='labelingRight'>Progressive</p>
-
-      </div>
-
-      <div className='padding15'></div>
 
       <div className='addComment'>
 
