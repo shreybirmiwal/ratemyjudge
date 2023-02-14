@@ -1,5 +1,4 @@
 import React from 'react'
-import './votejudge.css'
 import { useParams } from "react-router-dom";
 import { db } from '../firebase';
 import { collection, getDocs, doc,getDoc,updateDoc, arrayUnion, setDoc } from "firebase/firestore";
@@ -9,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../firebase';
+import Navbar from '../components/Navbar';
 
 function VoteJudge() {
     const navigate = useNavigate();
@@ -138,50 +138,49 @@ function VoteJudge() {
   }
   }
   return (
-    <div className="App">
-      <div className='headerText'>
-        <p> Vote on {firstName} {lastName}</p>
+    <div>
+      <Navbar/>
+      <div className='absolute w-full h-full top-0 left-0 bg-gray-900/30'></div>
+        <div className='absolute top-0 w-full h-full flex flex-col justify-center text-center text-black p-4'>
+          <h1 className='mb-5 hover:text-blue-500'> 
+            <a href={tempNameVar}>Vote on {firstName} {lastName}</a>
+          </h1>
+
+          <div className='flex flex-row justify-center mt-10'>
+            <h3 className='mr-5 mt-1.5'>&nbsp;&nbsp;Lay</h3>
+              <input  className="slida" id="typeinp" type="range" min="0" max="100" defaultValue="50" step="1" onChange={updateLaySlider}/>
+            <h3 className='ml-5 mt-1.5'>Flow</h3>  
+          </div>
+
+          <div className='flex flex-row justify-center mt-10'>
+            <h3 className='mr-5 mt-1.5'>Truth</h3>
+              <input  className="slida" id="typeinp" type="range" min="0" max="100" defaultValue="50" step="1" onChange={updateTruthSlider}/>
+            <h3 className='ml-5 mt-1.5'>Tech&nbsp;&nbsp;</h3>  
+          </div>
+
+          <div className='flex flex-row justify-center mt-10'>
+            <h3 className='mr-5 mt-1.5'>&nbsp;&nbsp;&nbsp;&nbsp;Slow</h3>
+              <input  className="slida" id="typeinp" type="range" min="0" max="100" defaultValue="50" step="1" onChange={updateSlowSlider}/>
+            <h3 className='ml-5 mt-1.5'>Spread</h3>  
+          </div>  
+
+
+          <div className='flex flex-row justify-center mt-10'>
+            <h3 className='mr-5 mt-1.5'>Traditional</h3>
+              <input  className="slida" id="typeinp" type="range" min="0" max="100" defaultValue="50" step="1" onChange={updateTradSlider}/>
+            <h3 className='ml-5 mt-1.5'>Progressive</h3>  
+          </div>
+
+          <div className='justify-center w-full'>
+            <button 
+            className='mt-10'
+            onClick={updateStats}>
+            Submit
+            </button>
+          </div>
+
+          
       </div>
-
-      <a href='/'> back to home </a>
-      <a href={tempNameVar}> View this Judge </a>
-
-
-      <div className='stats'>
-        <p className='labelingLeft'>Lay&nbsp;</p>
-          <input  className="slida" id="typeinp" type="range" min="0" max="100" defaultValue="50" step="1" onChange={updateLaySlider}/>
-        <p className='labelingRight'>Flow</p>
-      </div>
-
-
-      <div className='stats'>
-        <p className='labelingLeft'>Truth</p>
-          <input  className="slida" id="typeinp" type="range" min="0" max="100" defaultValue="50" step="1" onChange={updateTruthSlider}/>
-        <p className='labelingRight'>Tech&nbsp;&nbsp;&nbsp;</p>
-      </div>
-
-
-
-      <div className='stats'>
-        <p className='labelingLeft'>Slow&nbsp;</p>
-          <input  className="slida" id="typeinp" type="range" min="0" max="100" defaultValue="50" step="1" onChange={updateSlowSlider}/>
-          <p className='labelingRight'>Spread</p>
-      </div>
-
-
-
-      <div className='stats'>
-        <p className='labelingLeft'>Traditional</p>
-          <input  className="slida" id="typeinp" type="range" min="0" max="100" defaultValue="50" step="1" onChange={updateTradSlider}/>
-          <p className='labelingRight'>Progressive&nbsp;</p>
-      </div>
-
-
-      <button 
-          className='submitButton'
-          onClick={updateStats}>
-          Submit
-      </button>
 
       <ToastContainer/>
 

@@ -104,7 +104,7 @@ function ViewJudge() {
   return (
     <div>
       <Navbar/>
-      <div className='w-full h-screen relative'>
+      <div className=' h-screen relative'>
         <div className='absolute w-full h-full top-0 left-0 bg-gray-900/30'></div>
         <div className='absolute top-0 w-full h-full flex flex-col justify-center text-center text-black p-4'>
           <h1 className='mb-5'> Judging information about {routeParams.first} {routeParams.last}</h1>
@@ -122,7 +122,7 @@ function ViewJudge() {
           </div>
 
         <div className='flex flex-row justify-center mt-10'>
-          <h3 className='mr-5 mt-1.5'>Lay&nbsp;</h3>
+          <h3 className='mr-5 mt-1.5'>&nbsp;&nbsp;Lay</h3>
           <div style={{ width: `${400}px`, height: `${40}px` }} className='bg-white'> 
             <div style={{ width: `${data.lay*4/data.votes}px`, height: `${40}px` }}className='bg-blue-300'/>
           </div>
@@ -134,12 +134,12 @@ function ViewJudge() {
           <div style={{ width: `${400}px`, height: `${40}px` }} className='bg-white'> 
             <div style={{ width: `${data.truth*4/data.votes}px`, height: `${40}px` }}className='bg-blue-300'/>
           </div>
-          <h3 className='ml-5 mt-1.5'>Tech</h3>  
+          <h3 className='ml-5 mt-1.5'>Tech&nbsp;&nbsp;</h3>  
         </div>
 
 
         <div className='flex flex-row justify-center mt-10'>
-          <h3 className='mr-5 mt-1.5'>Slow</h3>
+          <h3 className='mr-5 mt-1.5'>&nbsp;&nbsp;&nbsp;&nbsp;Slow</h3>
           <div style={{ width: `${400}px`, height: `${40}px` }} className='bg-white'> 
             <div style={{ width: `${data.slow*4/data.votes}px`, height: `${40}px` }}className='bg-blue-300'/>
           </div>
@@ -153,45 +153,39 @@ function ViewJudge() {
             <div style={{ width: `${data.trad*4/data.votes}px`, height: `${40}px` }}className='bg-blue-300'/>
           </div>
           <h3 className='ml-5 mt-1.5'>Progressive</h3>  
-        </div>  
+        </div>
 
         
-       </div>
-       
-      </div>
+        <div className='mt-5'>
 
+          <div
+              className='flex justify-between items-center max-w-[700px] mx-auto w-full  p-1
+              rounded-md text-black'>
+                  <input
+                    className='w-full border-2 bg-white border-gray-100 rounded-xl p-4 mr-1.5 mt-1 bg-transparent'
+                    type='text'
+                    placeholder="Add a comment"
+                    value={commentText}
+                    onChange={updateCommentText}/>
 
-      <div className='addComment'>
-
-        <p className='commentText'> Add a comment: </p>
-
-        <input
-          className='commentInput'
-          type="text"
-          placeholder="Comment Text"
-          value={commentText}
-          onChange={updateCommentText}
-        />
-
-        <button 
-          className='submitButton'
-          onClick={submitComment}>
-          Submit
-        </button>
-
-
-      </div>
-
-
-      {commentsData["comments"] &&  commentsData["comments"].map((value, key) => {
-
-        return(
-          <div className='commentData'>
-            <p className='commentText' key={value}>{value}</p>
+                  <button className='m-5 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01]  ease-in-out transform py-4 bg-violet-500 rounded-xl text-white font-bold text-lg' onClick={submitComment}>Submit</button>
+              
           </div>
-        )
+          
+          <div className='flex flex-col items-center overflow-auto max-h-fit'>
+            {commentsData["comments"] &&  commentsData["comments"].map((value, key) => {
+              return(
+                <div className='flex w-2/6   p-4 mr-1.5 mt-1  items-center'>
+                  <p className='' key={value}>{value}</p>
+                </div>
+              )
+              })}
+          </div>
 
-      })}
+        </div>
+
+       </div>
+      </div>
 
       <ToastContainer/>
 
