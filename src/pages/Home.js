@@ -1,8 +1,8 @@
 import React from "react"
 
-import Navbar from "../components/Navbar.js";
-import Hero from "../components/Hero.js";
-import SearchBar from '../components/SearchBar';
+import Navbar from "../Components/Navbar.js";
+import Hero from "../Components/Hero.js";
+import SearchBar from '../Components/SearchBar';
 
 function Home() {
   return (

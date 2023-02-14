@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../firebase';
-import Navbar from '../components/Navbar.js';
+import Navbar from '../Components/Navbar.js';
 
 function VoteJudge() {
     const navigate = useNavigate();
