@@ -9,7 +9,7 @@ import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar.js';
 
 function ViewJudge() {
     const navigate = useNavigate();
