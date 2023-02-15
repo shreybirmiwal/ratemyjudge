@@ -143,16 +143,16 @@ function AddJudge() {
           <h2 className='py-4'></h2>
 
           <div
-            className='flex justify-between items-center max-w-[700px] mx-auto w-full  p-1
+            className='flex flex-col md:flex-row justify-between items-center max-w-[700px] mx-auto w-full  p-1
             rounded-md text-black '>
                 <input
-                   className='w-full border-2 bg-white border-gray-100 rounded-xl p-4 mr-1.5 mt-1 bg-transparent'
+                   className='w-full border-2 bg-white border-gray-100 rounded-xl p-4 md:mr-1.5 mt-1 bg-transparent'
                    type='text'
                     placeholder="First Name"
                     onChange={updateFirst}/>
 
                 <input
-                   className='w-full border-2 bg-white rounded-xl p-4 ml-1.5 mt-1 bg-transparent'
+                   className='w-full border-2 bg-white rounded-xl p-4 md:ml-1.5 mt-1 bg-transparent'
                    type='text'
                     placeholder="Last Name"
                     onChange={updateSecond}/>

@@ -18,7 +18,7 @@ const Navbar = () => {
           <rect y="50" width="80" height="12"></rect>
         </svg>
 
-        <h1 onClick={handleNav} className={logo ? 'hidden' : 'block'}>RATEMYJUDGE.COM</h1>
+        <h1 onClick={handleNav} className={logo ? 'hidden' : 'block'}>RATEMYJUDGE.XYZ</h1>
       </div>
 
       <ul className='hidden md:flex'>
@@ -40,9 +40,9 @@ const Navbar = () => {
           <rect y="50" width="80" height="12"></rect>
         </svg>
 
-        <h1>RATEMYJUDGE.COM</h1>
+        <h1>RATEMYJUDGE.XYZ</h1>
         </div>
-        
+
           <li className='border-b'><a href='/'> Home</a></li>
           <li className='border-b'><a href='/AddJudge'>Add a Judge</a></li>
           <li className='border-b'><a href='/About'>About</a></li>

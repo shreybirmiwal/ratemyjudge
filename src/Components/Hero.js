@@ -82,7 +82,7 @@ const Hero = () => {
             />
           </div>
           
-          <div>
+          <div  class="hidden md:block">
             <button>
               <AiOutlineSearch size={20} className='icon' style={{color: '#ffffff'}}  />
             </button>

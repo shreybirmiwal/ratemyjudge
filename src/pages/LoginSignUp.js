@@ -255,7 +255,7 @@ return (
         <div className='absolute top-0 h-full flex flex-col justify-center text-center text-black p-4'>
           
 
-          <h1 className="mb-7">{`Signed In as ${authUser.email}`}</h1>
+          <h1 className="mb-7">{`Signed in as ${authUser.email}`}</h1>
           
           <button onClick={userSignOut}>Sign Out</button>
 
