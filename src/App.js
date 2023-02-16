@@ -6,6 +6,7 @@ import ViewJudge from './pages/ViewJudge';
 import VoteJudge from "./pages/votejudge";
 import LoginSignUp from "./pages/LoginSignUp";
 import About from "./pages/About";
+import Directory from "./pages/Directory";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Vote/:first/:last" element={<VoteJudge/>} />
         <Route path="/Account/:redirect/:first/:last" element={<LoginSignUp/>}/>
         <Route path="/About" element={<About/>}/>
+        <Route path="/Directory" element={<Directory/>}/>
 
       </Routes>
     </Router>

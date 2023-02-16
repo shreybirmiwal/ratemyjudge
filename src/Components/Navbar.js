@@ -24,6 +24,7 @@ const Navbar = () => {
       <ul className='hidden md:flex'>
         <li className='hover:text-blue-700'> <a href='/'> Home</a> </li>
         <li className='hover:text-blue-700'> <a href='/AddJudge'>Add a Judge</a></li>
+        <li className='hover:text-blue-700'> <a href="/Directory">Directory</a></li>
         <li className='hover:text-blue-700'> <a href='/About'>About</a></li>
         <li className='hover:text-blue-700'> <a href="/Account/x/x/x">Account</a></li>
       
@@ -45,6 +46,7 @@ const Navbar = () => {
 
           <li className='border-b'><a href='/'> Home</a></li>
           <li className='border-b'><a href='/AddJudge'>Add a Judge</a></li>
+          <li className='border-b'><a href='/Directory'>Directory</a></li>
           <li className='border-b'><a href='/About'>About</a></li>
           <li className='border-b'><a href='/Account/x/x/x'>Account</a></li>
 

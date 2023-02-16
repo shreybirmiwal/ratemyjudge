@@ -93,7 +93,7 @@ const Hero = () => {
         {filteredData.length != 0 && (
             <div >
 
-                {filteredData.slice(0, 15).map((value, key) => {
+                {filteredData.slice(0, 5).map((value, key) => {
                     
                     const arr = value.split(' ')
 
