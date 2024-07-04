@@ -133,7 +133,6 @@ const Hero = () => {
       <div className='absolute bottom-0 content-center p-5'>
         <h3> shrey birmiwal</h3>
         <a className="hover:bg-blue-300" href='https://github.com/shreybirmiwal/ratemyjudge'> github </a>
-        <a className="hover:bg-blue-300" href='https://www.instagram.com/shrey.birmiwal/'> instagram </a>
 
       </div>
 
